@@ -1,0 +1,14 @@
+dfs:
+	-search by going to the deepest of the road its taken
+	-use a stack
+	-may or may not give you the optimal solution in the maze problem(depend on luck)
+	
+bfs:
+	-search by taking a step in every possible direction every time 
+	-use a queue
+	-if the goal is far away from the initial state, bfs may explore the entire graph 
+	-finds the optimal solution
+	
+greedy bfs:
+	-it finds the best decision in a specific step but it's not nessesirly the optimal solution
+	
