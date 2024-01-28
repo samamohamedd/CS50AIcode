@@ -40,7 +40,44 @@ class queueFrontier(StackFrontier):
         
 class maze:
 
-    def __init__(self) -> None:
+    def __init__(self, filename) -> None:
         with open(filename) as f:
-            pass
+            contents = f.read()
+        
+        #validating the start and goal points
+        if contents.count("S") != 1:
+            raise Exception ("the maze should have one starting point")
+        if contents.count("G") != 1:
+            raise Exception ("the maze should have one goal point")
+        
+        contents = contents.splitlines()
+        self.height = len(contents)
+        #calculate each line length and return the biggest(the max)
+        self.width = max(len(line)for line in contents)
+
+        #tracking the walls, start, and goal
+        self.walls = []
+        for i in range (self.height):
+            wallsInRow=[]
+            for j in range(self.width):
+                try:
+                    if contents[i][j] == "S":
+                        self.start = (i,j)
+                        wallsInRow.append(False)
+                    elif contents[i][j] == "G":
+                        self.end =(i,j)
+                        wallsInRow.append(False)
+                    elif contents[i][j] == " ":
+                        wallsInRow.append(False)
+                    else:
+                        wallsInRow.append(True)
+                except IndexError:
+                    wallsInRow.append(False)
+                self.walls.append(wallsInRow)
+
+                
+
+                        
+
+
         
