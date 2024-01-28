@@ -12,3 +12,6 @@ bfs:
 greedy bfs:
 	-it finds the best decision in a specific step but it's not nessesirly the optimal solution
 	
+A* :
+	-depend on not only how far away i'm to the goal but also the cost of getting to this point
+	-it's optimal if h(n) is admissible and consistent, not always optimal
