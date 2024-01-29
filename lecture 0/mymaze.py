@@ -41,6 +41,8 @@ class queueFrontier(StackFrontier):
 class maze:
 
     def __init__(self, filename) -> None:
+        #properties: height, width, walls, start, end, solution
+
         with open(filename) as f:
             contents = f.read()
         
@@ -75,9 +77,16 @@ class maze:
                     wallsInRow.append(False)
                 self.walls.append(wallsInRow)
 
-                
+        self.solution = None
 
-                        
+    def neighbors(self, state):        
+        row, col = state
+        candidates = [
+            ("up",(row-1,col)),
+            ("down",(row+1,col)),
+            ("right",(row,col+1)),
+            ("left",(row,col-1))
+        ]
 
 
         
