@@ -1,6 +1,6 @@
 import sys
 
-class node:
+class Node:
     def __init__(self,state,parent,action ) -> None:
         self.parent = parent
         self.state = state
@@ -58,7 +58,7 @@ class maze:
         self.width = max(len(line)for line in contents)
 
         #tracking the walls, start, and goal
-        self.walls = []
+        self.walls = [] #this wall variable: each element is a row,  
         for i in range (self.height):
             wallsInRow=[]
             for j in range(self.width):
@@ -87,6 +87,48 @@ class maze:
             ("right",(row,col+1)),
             ("left",(row,col-1))
         ]
+
+        #result var will help determine if a position is on an edge or not 
+        # also will help what are the walls around this neighbor
+        result = []
+        for action , (r,c) in candidates: #getting data from the candidatets list
+            if 0 <= r < self.height and 0 <= c < self.width and not self.walls[r][c]:
+                result.append(((action , (r,c))))
+        return result
+    
+    def print(self):
+        solution = self.solution if self.solution[1] is not None else None
+        print()
+        for i,row in enumerate(self.walls):
+            for j,col in enumerate(row):
+                if col :
+                    print("█", end="")
+                elif (i,j) == self.start:
+                    print("S", end="")
+                elif (i,j) == self.end:
+                    print("G", end="")
+                elif self.solution is not None and (i,j) in self.solution:
+                    print("*", end="")
+            print()
+        print()
+
+    
+    def solve(self):
+        
+        self.exploredNum = 0 #number of states explored
+        self.explored = set() #set of items exeplored
+        
+        start = Node(state=self.start, parent=None, action=None)
+        frontier = StackFrontier
+        frontier.add(start)
+
+        while True:
+
+            if frontier.empty():
+                raise Exception("there's no solution")
+            
+            node = frontier.remove()
+            self.exploredNum += 1
 
 
         
